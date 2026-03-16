@@ -1,0 +1,25 @@
+From e35a35e8fe3b331ae56c74d4a78ad54d820d5356 Mon Sep 17 00:00:00 2001
+From: Ime <imeahonusiasamudo@gmail.com>
+Date: Sun, 15 Mar 2026 21:19:15 -0600
+Subject: [PATCH] Added bme280 to the imx91 dts
+
+---
+ arch/arm64/boot/dts/freescale/imx91-11x11-frdm.dts | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx91-11x11-frdm.dts b/arch/arm64/boot/dts/freescale/imx91-11x11-frdm.dts
+index 9f0d299a74c9..3a3900009fd2 100644
+--- a/arch/arm64/boot/dts/freescale/imx91-11x11-frdm.dts
++++ b/arch/arm64/boot/dts/freescale/imx91-11x11-frdm.dts
+@@ -257,6 +257,11 @@ pcal6408: gpio@20 {
+ 		status = "okay";
+ 	};
+ 
++	bme280: bme280@76 {
++		compatible	 = "bosch,bme280";
++		reg = <0x76>;
++		status = "okay";
++	};
+ };
+ 
+ &lpi2c2 {
