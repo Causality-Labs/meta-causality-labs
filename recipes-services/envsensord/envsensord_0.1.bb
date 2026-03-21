@@ -6,22 +6,16 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 PR = "r0"
 
-# Replace with your real source (git, tarball, local files, etc.)
-# Example for a local file in the layer:
-#   FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-#   SRC_URI = "file://envsensord.c"
-SRC_URI = ""
+# FILES:${PN} += "${bindir} ${sbindir} ${sysconfdir} ${systemd_system_unitdir}"
 
-S = "${WORKDIR}/sources"
+# If you add a systemd service, you can enable systemd integration like this:
+# inherit systemd
+# SYSTEMD_SERVICE:${PN} = "envsensord.service"
+FILES:${PN} += "${bindir}"
 
-# Inherit a build class appropriate for your project, e.g.:
-# inherit cmake
-# inherit autotools
-# inherit pkgconfig
-
-do_unpack[noexec] = "1"
-do_configure[noexec] = "1"
-do_compile[noexec] = "1"
+SRC_URI = "git://github.com/Causality-Labs/envsensord.git;protocol=https;branch=main"
+SRCREV = "13187844f4b1c80a94bea26a8f94ed1f0152c4bb"
+S = "${WORKDIR}/git"
 
 do_install() {
 	# Install binaries, configs, and service files here.
@@ -33,11 +27,7 @@ do_install() {
 	# install -d ${D}${systemd_system_unitdir}
 	# install -m 0644 ${WORKDIR}/envsensord.service \
 	#     ${D}${systemd_system_unitdir}/envsensord.service
-	:
+	install -d ${D}${bindir}
+	install -m 0755 bin/envsensord ${D}${bindir}/envsensord
+	install -m 0755 bin/envsensor-cli ${D}${bindir}/envsensor-cli
 }
-
-FILES:${PN} += "${bindir} ${sbindir} ${sysconfdir} ${systemd_system_unitdir}"
-
-# If you add a systemd service, you can enable systemd integration like this:
-# inherit systemd
-# SYSTEMD_SERVICE:${PN} = "envsensord.service"
