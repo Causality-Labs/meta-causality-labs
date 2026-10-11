@@ -1,0 +1,11 @@
+[Unit]
+Description=Environment Sensor Daemon
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/envsensord -d /dev/i2c-2
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
