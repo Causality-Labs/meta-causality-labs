@@ -14,9 +14,6 @@ inherit cmake
 # Needed to use unit tests
 EXTRA_OECMAKE = "-DBUILD_TESTING=OFF"
 
-# _FORTIFY_SOURCE fails with upstream's -O0 -Werror
-lcl_maybe_fortify = ""
-
 PACKAGES =+ "${PN}-examples"
 FILES:${PN}-examples = " \
     ${bindir}/mcu-co-blink \
