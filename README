@@ -1,1 +1,31 @@
-This README file contains information on the contents of the meta-causality-labs layer.
+meta-causality-labs
+===================
+
+Yocto layers for Causality Labs software.
+
+Layers
+------
+
+meta-causality-apps
+    Hardware-independent application recipes.
+
+meta-causality-imx
+    Board support for NXP i.MX boards: kernel configuration and
+    board-specific settings.
+
+Usage
+-----
+
+Add the layers to conf/bblayers.conf:
+
+    BBLAYERS += "${BSPDIR}/sources/meta-causality-labs/meta-causality-apps"
+    BBLAYERS += "${BSPDIR}/sources/meta-causality-labs/meta-causality-imx"
+
+Add the packages you need to IMAGE_INSTALL in conf/local.conf, then
+build your image.
+
+Guidelines
+----------
+
+Keep anything hardware-specific out of meta-causality-apps. It belongs
+in a board support layer such as meta-causality-imx or a new bsp layer.
